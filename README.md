@@ -15,10 +15,26 @@ Inwiefern lassen sich Dry-Bean-Sorten anhand weniger morphologischer Bildmerkmal
 
 ## Geplante Modelle
 
-- Logistic Regression als lineares Vergleichsmodell
-- Random Forest als robustes Ensemble-Verfahren
-- HistGradientBoostingClassifier als leistungsstaerkeres Boosting-Verfahren
-- Optional: MLPClassifier als einfaches neuronales Netz
+- LogisticRegression als Baseline und gut interpretierbares lineares Vergleichsmodell
+- RandomForestClassifier als robustes Ensemble-Verfahren mit Feature Importances
+- HistGradientBoostingClassifier als modernes, leistungsstaerkeres Boosting-Verfahren
+
+## Erste Feature-Auswahl
+
+Als erster Arbeitsstand wird folgendes 8-Feature-Set verwendet:
+
+```text
+Area
+Perimeter
+AspectRation
+Compactness
+roundness
+ShapeFactor1
+ShapeFactor2
+ShapeFactor4
+```
+
+Die Begruendung und erste Modellversuche sind dokumentiert in `reports/notes/feature_selection_first_trials.md`.
 
 ## Geplante XAI-Methoden
 
@@ -29,8 +45,9 @@ Inwiefern lassen sich Dry-Bean-Sorten anhand weniger morphologischer Bildmerkmal
 ## Projektstruktur
 
 ```text
+DryBeanDataset/     Lokaler Dry-Bean-Datensatz
 data/
-  raw/              Rohdaten, falls lokal gespeichert
+  raw/              optionale Rohdaten
   processed/        generierte Zwischendaten, nicht versioniert
 notebooks/
   01_eda_feature_selection.ipynb
@@ -79,10 +96,16 @@ python -m ipykernel install --user --name xai-drybean --display-name "Python (xa
 - Vor Arbeitsbeginn immer `git pull` ausfuehren, sobald ein Remote-Repository verbunden ist.
 - Kleine Commits mit klaren Nachrichten verwenden.
 
-## Datenquelle
+## Datenquelle und lokaler Pfad
 
 Dry Bean Dataset, UCI Machine Learning Repository:  
 https://archive.ics.uci.edu/dataset/602/dry+bean+dataset
+
+Die Notebooks laden den lokalen Excel-Datensatz aus:
+
+```text
+DryBeanDataset/Dry_Bean_Dataset.xlsx
+```
 
 ## Wichtige Literatur
 

@@ -10,4 +10,3 @@ openpyxl
 shap
 lime
 joblib
-ucimlrepo
