@@ -1,0 +1,13 @@
+jupyterlab
+ipykernel
+pandas
+numpy
+scikit-learn
+matplotlib
+seaborn
+scipy
+openpyxl
+shap
+lime
+joblib
+ucimlrepo
