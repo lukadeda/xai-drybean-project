@@ -1,0 +1,32 @@
+{
+  "created_at": "2026-06-21",
+  "workspace_root": "/Users/lukadeda/xai/projektarbeit",
+  "context_scope": "Root project context for XAI Dry Bean classification materials",
+  "user_priority": "Main focus on all folders except lab, lab2, and paper vortrag2; those should only be skimmed if present.",
+  "main_report_candidate": "XAI_Projektarbeit 19.54.42 (current confirmed Overleaf export)",
+  "workflow_note": "User edits the report in Overleaf and copies exports locally for checking. Always inspect the newest XAI_Projektarbeit* folder first.",
+  "context_structure_note": "Root _context-helper is the overarching projectarbeit context. peer-review/_context-helper is a separate workstream context and should remain separate unless peer-review work is requested.",
+  "writing_preference": "Use human-voice-writer style rules whenever drafting or revising report prose.",
+  "confidence": "medium-high",
+  "coverage_status": "partial",
+  "handoff_readiness": "medium-high",
+  "strongest_sources": [
+    "README.md",
+    "XAI_Projektarbeit 19.54.42/Chapters/Einleitung.tex",
+    "XAI_Projektarbeit 19.54.42/Chapters/Datensatz.tex",
+    "XAI_Projektarbeit 19.54.42/Chapters/Architektur-Implementierung.tex",
+    "XAI_Projektarbeit 19.54.42/Chapters/Ergebnisse-der-Klassifikation.tex",
+    "notebooks/02_model_training.ipynb",
+    "reports/notes/domain_research.md"
+  ],
+  "main_gaps": [
+    "XAI chapter is empty while XAI implementation is partial.",
+    "Evaluation/discussion/conclusion/abstract are mostly missing.",
+    "Feature-selection wording mismatch around ShapeFactor3 vs ShapeFactor4.",
+    "Metric table mismatch between notebooks/modelvergleich.tex and current report table.",
+    "Multiple XAI_Projektarbeit* folders can exist due to Overleaf exports; use the newest confirmed export."
+  ],
+  "latest_code_update": "notebooks/02_model_training.ipynb now stores predictions per model and exports the four-model confusion-matrix figure to XAI_Projektarbeit 19.54.42/Graphics/.",
+  "latest_report_update": "XAI_Projektarbeit 19.54.42/Chapters/Ergebnisse-der-Klassifikation.tex now includes a data-based interpretation of the four confusion matrices.",
+  "generated_files_updated": true
+}
