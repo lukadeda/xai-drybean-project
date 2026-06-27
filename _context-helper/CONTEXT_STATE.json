@@ -7,6 +7,8 @@
   "workflow_note": "User edits the report in Overleaf and copies exports locally for checking. Always inspect the newest XAI_Projektarbeit* folder first.",
   "context_structure_note": "Root _context-helper is the overarching projectarbeit context. peer-review/_context-helper is a separate workstream context and should remain separate unless peer-review work is requested.",
   "writing_preference": "Use human-voice-writer style rules whenever drafting or revising report prose.",
+  "evidence_preference": "Report justifications must be grounded in checked sources with references/locators. Do not invent support from memory.",
+  "submission_scope": "Report and Jupyter notebook both matter. The notebook must run and its metrics/figures must match the report.",
   "confidence": "medium-high",
   "coverage_status": "partial",
   "handoff_readiness": "medium-high",
@@ -26,7 +28,7 @@
     "Metric table mismatch between notebooks/modelvergleich.tex and current report table.",
     "Multiple XAI_Projektarbeit* folders can exist due to Overleaf exports; use the newest confirmed export."
   ],
-  "latest_code_update": "notebooks/02_model_training.ipynb now stores predictions per model and exports the four-model confusion-matrix figure to XAI_Projektarbeit 19.54.42/Graphics/.",
-  "latest_report_update": "XAI_Projektarbeit 19.54.42/Chapters/Ergebnisse-der-Klassifikation.tex now includes a data-based interpretation of the four confusion matrices.",
+  "latest_code_update": "notebooks/02_model_training.ipynb was cleaned into an abgabeready linear workflow with fixed final model parameters, fresh execution outputs, modelvergleich.tex export, classification reports for all four models, and four-model confusion-matrix export.",
+  "latest_report_update": "XAI_Projektarbeit 19.54.42/Chapters/Ergebnisse-der-Klassifikation.tex and Architektur-Implementierung.tex were synchronized with the freshly executed notebook values and Python version.",
   "generated_files_updated": true
 }

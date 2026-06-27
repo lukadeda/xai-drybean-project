@@ -1,0 +1,64 @@
+\chapter{Methodik und Implementierung}\label{chap:Methodik-und--Implementierung}
+Dieses Kapitel beschreibt, wie die Modelle trainiert und bewertet wurden. Zuerst werden das experimentelle Setup und die Datenvorverarbeitung erklärt. Danach folgen Feature-Auswahl, Train-Test-Split, Skalierung und das Evaluationsdesign für den Modellvergleich.
+
+
+
+\section{Experimentelles Setup}
+
+Die Analyse wurde in Python durchgeführt. Der Code lief in Jupyter Notebooks. Für Datenverarbeitung, Modellierung und Visualisierung wurden vor allem \texttt{pandas}, \texttt{numpy}, \texttt{scikit-learn}, \texttt{matplotlib} und \texttt{seaborn} verwendet. Das finale Trainingsnotebook wurde mit Python~3.13.0 ausgeführt.
+
+Die Berechnungen wurden auf einem Rechner mit AMD Ryzen 7 5800H, 8 Kernen und 16 GB RAM durchgeführt.
+
+\section{Datenvorverarbeitung}
+
+Auf Basis der Datenprüfung aus Kapitel~\ref{chap:Datensatz-und-explorative-Datenanalyse} mussten keine fehlenden Werte ersetzt und keine kategorialen Eingangsvariablen umgewandelt werden. Danach folgten Feature-Auswahl, Aufteilung in Trainings- und Testdaten und modellabhängige Skalierung.
+
+Im finalen Trainingssetup wurden mögliche Ausreißer nicht automatisch entfernt. Da die Merkmale Form und Größe der Bohnen beschreiben, können extreme Werte auch zu bestimmten Sorten gehören. Die Ausreißeranalyse diente daher nur zur Einschätzung des Datensatzes und nicht als automatische Bereinigung vor dem Modelltraining.
+
+
+\section{Feature-Auswahl}
+
+Die Feature-Auswahl basiert auf den Ergebnissen der explorativen Datenanalyse aus Kapitel~\ref{chap:Datensatz-und-explorative-Datenanalyse}. Ziel war eine reduzierte Merkmalsmenge, die fachlich verständlich bleibt und die wichtigsten morphologischen Eigenschaften der Bohnen abbildet. Verwendet wurden acht Merkmale:
+
+\begin{itemize}
+    \item \texttt{Area}
+    \item \texttt{AspectRatio}
+    \item \texttt{Eccentricity}
+    \item \texttt{Compactness}
+    \item \texttt{Roundness}
+    \item \texttt{ShapeFactor1}
+    \item \texttt{ShapeFactor2}
+    \item \texttt{ShapeFactor4}
+\end{itemize}
+
+Die Auswahl deckt mehrere Merkmalsgruppen ab. \texttt{Area} beschreibt die Größe der Bohne. \texttt{AspectRatio} und \texttt{Eccentricity} erfassen, ob eine Bohne eher länglich oder rundlich ist. \texttt{Compactness} und \texttt{Roundness} beschreiben die Kompaktheit und Rundheit der Form. Die drei Shape-Factor-Merkmale ergänzen diese Informationen durch weitere geometrische Formbeschreibungen \cite{khan2023comparison}.
+
+Nicht aufgenommen wurden mehrere Merkmale, die in der eigenen Korrelationsanalyse in Kapitel~\ref{chap:Datensatz-und-explorative-Datenanalyse} als stark redundant auffielen. \texttt{ConvexArea} und \texttt{EquivDiameter} enthalten ähnliche Größeninformationen wie \texttt{Area}. \texttt{Perimeter}, \texttt{MajorAxisLength} und \texttt{MinorAxisLength} wurden nicht zusätzlich verwendet, weil Umfangs- und Achseninformationen teilweise mit Größe und Länglichkeit zusammenhängen. \texttt{ShapeFactor3} wurde ausgeschlossen, da es fast vollständig mit \texttt{Compactness} zusammenhängt.
+
+Die Auswahl ist ein Kompromiss. Sie reduziert die Anzahl der Features, behält aber die fachlich wichtigsten Größen- und Forminformationen bei. Für die spätere XAI-Auswertung ist das hilfreich, weil Erklärungen bei weniger redundanten Merkmalen besser lesbar sind \cite[Kap.~18, Kap.~23]{molnar2025interpretable}.
+
+\section{Train-Test-Split und Skalierung}
+
+Die Daten wurden in Trainings- und Testdaten aufgeteilt. Die Aufteilung erfolgte stratifiziert, damit alle sieben Sorten in beiden Teilmengen ungefähr im ursprünglichen Verhältnis vertreten sind. Verwendet wurden:
+
+\begin{itemize}
+    \item Testanteil: 20\,\%
+    \item Stratifikation: nach der Zielvariable \texttt{Class}
+    \item Random State: 42
+\end{itemize}
+
+Im gespeicherten Trainingslauf ergeben sich dadurch 10.888 Trainingsbeobachtungen und 2.723 Testbeobachtungen mit jeweils acht Eingangsmerkmalen.
+
+Für Logistic Regression und MLP wurde eine Standardisierung der Eingangsmerkmale verwendet. Für Random Forest und HistGradientBoosting wurde keine Skalierung verwendet, da diese Modelle auf Entscheidungsbäumen basieren und Splits über Schwellenwerte einzelner Merkmale bilden.
+
+\section{Modellierung}
+
+Wie in Kapitel~\ref{chap:Grundlagen} beschrieben, wurden vier Modellfamilien verglichen: logistische Regression, Random Forest, HistGradientBoosting und ein Multi-Layer-Perzeptron. Die Auswahl umfasst ein lineares Basismodell, zwei baumbasierte Ensemble-Verfahren und ein einfaches neuronales Netz.
+
+
+
+\section{Evaluationsdesign}
+
+Zur Bewertung werden Accuracy und Macro-F1 verwendet. Accuracy beschreibt den Anteil korrekt klassifizierter Beobachtungen. Macro-F1 fasst die Leistung über alle Klassen gleichgewichtet zusammen und ist wegen der ungleichen Klassenverteilung besonders wichtig. Konfusionsmatrizen für alle vier Modelle zeigen ergänzend, welche Sorten konkret verwechselt werden.
+
+Für die XAI-Auswertung werden globale und lokale Erklärungen kombiniert. Die konkrete Auswertung erfolgt in Kapitel~\ref{chap:XAI-Methoden}. Dort werden auch die lokalen Fälle begründet ausgewählt.

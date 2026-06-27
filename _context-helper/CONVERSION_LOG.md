@@ -9,3 +9,7 @@ Potential future conversions:
 - `Projektarbeit_Anforderungen.pdf` if formal requirement compliance becomes important.
 - `XAI_Projektarbeit 19.54.42/htwsaar-i-mst-vorlage.pdf` or a newer Overleaf-exported PDF if the compiled report needs review independent of LaTeX sources.
 - Selected paper PDFs only if deeper literature synthesis is requested.
+
+## 2026-06-21
+
+- Converted `Projektarbeit_Anforderungen.pdf` to `Projektarbeit_Anforderungen.md` using `pdftotext -layout` for requirement checking.

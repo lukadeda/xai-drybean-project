@@ -19,4 +19,8 @@ Context structure: this root `_context-helper/` is the overarching context for t
 
 Writing preference: when drafting or revising report prose, use the `human-voice-writer` style rules. Keep the language natural, technical, and not visibly AI-written.
 
+Evidence rule: report arguments and methodological justifications must be grounded in checked sources. Use concrete references, chapter/page/section locators where possible, and do not invent support from memory.
+
+Submission scope: both the report and the Jupyter notebook matter. The notebook must run and its metrics/figures must match the values reported in the report.
+
 The most incomplete sections in the current report export are XAI results, evaluation/discussion, conclusion, and abstract.
