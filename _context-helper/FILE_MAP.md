@@ -18,7 +18,7 @@
 - `notebooks/01_eda_feature_selection.ipynb`: EDA, class distribution, correlation matrix, feature-selection reasoning.
 - `notebooks/02_model_training.ipynb`: model training and comparison; current main metrics match the report chapter.
 - `notebooks/02_model_training_mit_ausreisserbehandlung.ipynb`: variant with IQR outlier handling; not the final setup described in the report.
-- `notebooks/03_xai_explanations.ipynb`: partial XAI notebook; Permutation Importance exists, SHAP/LIME incomplete.
+- `notebooks/03_xai_explanations.ipynb`: executed XAI notebook with Permutation Importance, global SHAP, local SHAP, and local LIME for the final Random Forest model.
 - `notebooks/04_results_summary.ipynb`: placeholder result summary.
 - `notebooks/modelvergleich.tex`: older/different model table; use cautiously.
 
@@ -41,6 +41,7 @@
 
 ## Older Or Secondary Material
 
+- `Gastvorlesung/`: separate guest-lecture material with PyTorch/torchvision image inference notebooks for classification, object detection, segmentation, and Captum Grad-CAM. It is structurally different from the Dry Bean tabular scikit-learn workflow and should not be treated as a template for the report's SHAP/LIME/PFI implementation without adaptation.
 - `XAI_Projektarbeit_neu/`: deleted old local draft after user approval.
 - `XAI_Projektarbeit 19.54.42/paper/drybean_dataset/`: supporting literature PDFs; skimmed only.
 - `peer-review/`: separate peer-review materials and its own `_context-helper/`; not merged into this root context.

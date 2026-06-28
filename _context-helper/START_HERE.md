@@ -11,7 +11,7 @@ Best current entry points:
 - `EVIDENCE_INDEX.md` for grounded claims and source locators.
 - `OPEN_QUESTIONS.md` and `NEXT_STEPS.md` for what remains to do.
 
-Current assessment: the project is a German XAI report on multiclass Dry Bean classification using selected morphological features.
+Current assessment: the project is a German XAI report on multiclass Dry Bean classification using selected morphological features. The classification notebook and XAI notebook now run with the final feature set; the report text still needs to catch up with the implemented XAI results.
 
 User workflow: the report is edited in Overleaf and then copied into this workspace for checking. Always inspect the newest local `XAI_Projektarbeit*` export folder first. The currently confirmed newest export is `XAI_Projektarbeit 19.54.42/`.
 
@@ -23,4 +23,4 @@ Evidence rule: report arguments and methodological justifications must be ground
 
 Submission scope: both the report and the Jupyter notebook matter. The notebook must run and its metrics/figures must match the values reported in the report.
 
-The most incomplete sections in the current report export are XAI results, evaluation/discussion, conclusion, and abstract.
+The most incomplete sections in the current report export are the written XAI results chapter, evaluation/discussion, conclusion, and abstract. The XAI notebook already exports Permutation Importance, SHAP, and LIME figures for the Random Forest model.

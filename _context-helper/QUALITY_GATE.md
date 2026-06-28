@@ -11,11 +11,11 @@
 
 ## Known Weaknesses
 
-- Notebook outputs were inspected via targeted reads/searches, not fully re-executed.
+- `01_eda_feature_selection.ipynb` and `03_xai_explanations.ipynb` were fully executed successfully after fixes. `02_model_training.ipynb` was previously executed successfully after cleanup.
 - PDFs were not converted.
 - Assignment requirements were not deeply indexed.
-- The XAI implementation state needs verification by actually running/completing notebooks.
+- XAI implementation is now verified by notebook execution, including Permutation Importance, SHAP, and LIME. The written XAI chapter still needs to be completed.
 
 ## Handoff Readiness
 
-Medium-high. A future agent can continue report writing or XAI implementation quickly, but final submission work requires additional verification.
+High for continuing report writing. Final submission still requires Overleaf compile, citation check, and full report/notebook consistency review.

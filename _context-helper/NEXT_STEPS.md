@@ -16,54 +16,56 @@ Before any report work, check whether the user imported a newer `XAI_Projektarbe
 - Do not reintroduce `XAI_Projektarbeit_neu/`; it was deleted as an old draft.
 - Keep `peer-review/_context-helper/` separate unless the task is explicitly about peer review.
 
-## Phase 1: Fix And Complete XAI Notebook
+## Phase 1: XAI Notebook Completed
 
-Priority: highest.
+Status: completed.
 
 File: `notebooks/03_xai_explanations.ipynb`.
 
-Tasks:
+Completed work:
 
-1. Align data setup with `notebooks/02_model_training.ipynb`.
-2. Use the same selected features: `Area`, `AspectRatio`, `Eccentricity`, `Compactness`, `Roundness`, `ShapeFactor1`, `ShapeFactor2`, `ShapeFactor4`.
-3. Remove old feature names from XAI work: `AspectRation` and `ShapeFactor3` are not the final setup.
-4. Use the same split: `test_size=0.2`, `stratify=y`, `random_state=42`.
-5. Train or load the model used for XAI with fixed parameters, not a long GridSearch.
-6. Recommended detailed XAI model: Random Forest or HistGradientBoosting. Prefer the one that gives stable SHAP support in the local environment.
-7. Keep MLP in the model comparison. Optionally compute Permutation Importance for MLP, but do not make it the first SHAP target unless runtime is acceptable.
+1. `notebooks/03_xai_explanations.ipynb` uses the final selected features: `Area`, `AspectRatio`, `Eccentricity`, `Compactness`, `Roundness`, `ShapeFactor1`, `ShapeFactor2`, `ShapeFactor4`.
+2. It uses the same split logic as training: `test_size=0.2`, `stratify=y`, `random_state=42`.
+3. It trains the final Random Forest configuration from `02_model_training.ipynb`.
+4. It loads the UCI CSV directly with a `certifi` SSL context to avoid `ucimlrepo` CSV SSL failures in VS Code/Python setups.
+5. It implements Permutation Importance, global SHAP, local SHAP, and local LIME.
+6. It exports all XAI figures to both `notebooks/` and `XAI_Projektarbeit 19.54.42/Graphics/`.
 
-Acceptance criteria:
+Verified acceptance criteria:
 
 - Notebook runs top to bottom in the project environment.
 - XAI notebook uses the same feature set and split as the training notebook.
-- At least two XAI methods are implemented.
-- At least one global and one local explanation are produced.
-- Figures are exported to the current report export under `XAI_Projektarbeit 19.54.42/Graphics/` or a newer confirmed export.
+- Three XAI methods are implemented: Permutation Importance, SHAP, and LIME.
+- Global and local explanations are produced.
+- Figures are exported to the current report export under `XAI_Projektarbeit 19.54.42/Graphics/`.
 
-## Phase 2: Implement Minimum XAI Methods
+## Phase 2: Implemented XAI Methods
 
-Recommended minimum: Permutation Importance plus SHAP.
+Status: completed. The final implementation includes Permutation Importance, SHAP, and LIME.
 
 Permutation Importance:
 
 - Use `sklearn.inspection.permutation_importance`.
 - Score with `f1_macro` to match the report focus on Macro-F1.
-- Export a PDF figure, for example `Graphics/Permutation_Importance.pdf`.
+- Exported PDF: `Graphics/Permutation_Importance_RandomForest.pdf`.
 - Save a table or print output with feature rankings.
 
 SHAP:
 
 - Use a source-backed justification for the chosen explainer.
 - If using a tree model, check SHAP documentation and Molnar before writing that TreeSHAP is efficient for tree models.
-- Produce a global SHAP plot or feature ranking.
-- Produce local explanations for selected instances.
-- Export figures with stable filenames, for example `Graphics/SHAP_Global.pdf` and `Graphics/SHAP_Local_SIRA_DERMASON.pdf`.
+- Produced a global SHAP ranking and local SHAP explanation.
+- Exported figures: `Graphics/SHAP_Global_RandomForest.pdf` and `Graphics/SHAP_Local_RandomForest.pdf`.
 
-Local cases to select:
+LIME:
 
-- One correctly classified `BOMBAY` instance, because confusion matrices show it is easy to separate.
-- One `SIRA`/`DERMASON` confusion, because this is the dominant error pattern.
-- One `BARBUNYA`/`CALI` confusion if time permits.
+- Implemented a local explanation for the same correctly classified test instance used by local SHAP.
+- Exported figure: `Graphics/LIME_Local_RandomForest.pdf`.
+
+Current local case:
+
+- One correctly classified `DERMASON` instance. SHAP and LIME explain the same instance.
+- Optional improvement if time permits: add a `DERMASON`/`SIRA` confusion case because that is the dominant error pattern in the confusion matrices.
 
 Acceptance criteria:
 
@@ -86,16 +88,37 @@ Tasks:
 
 1. Verify exact claims about SHAP explainers before writing them.
 2. Verify exact claims about PFI and correlated features before writing them.
-3. If LIME is skipped, adjust the report promise in `Einleitung.tex` and `Grundlagen.tex`, or explicitly say why LIME was not used in the final evaluation. This decision must fit the requirements, which ask for at least two XAI methods.
+3. Keep the report promise in `Einleitung.tex` and `Grundlagen.tex` aligned with the implemented methods: SHAP, LIME, and Permutation Feature Importance are now all implemented and used in the XAI chapter.
 
 Acceptance criteria:
 
 - No methodological justification appears in the report without a citation.
 - Claims about runtime, model compatibility, or interpretation limits are backed by checked sources.
 
-## Phase 4: Fill XAI Report Chapter
+## Phase 4: XAI Report Chapter Completed
+
+Status: completed for the current export.
 
 File: `XAI_Projektarbeit 19.54.42/Chapters/XAI-Methoden.tex`.
+
+The chapter now covers:
+
+1. Ziel der XAI-Auswertung.
+2. Begründung der Modellwahl für die XAI-Auswertung.
+3. Globale Erklärungen mit Permutation Feature Importance.
+4. Globale SHAP-Auswertung.
+5. Lokale SHAP-Erklärung.
+6. Lokale LIME-Erklärung.
+7. Vergleich der XAI-Methoden.
+8. Zwischenfazit mit Domänenwissen.
+
+Verified:
+
+- All referenced XAI figures exist in `XAI_Projektarbeit 19.54.42/Graphics/`.
+- Local `latexmk -pdf -interaction=nonstopmode -halt-on-error htwsaar-i-mst-vorlage.tex` succeeds.
+- Remaining LaTeX messages are Overfull/PDF-version warnings, not hard errors.
+
+Historical suggested structure retained below for reference:
 
 Suggested structure:
 
@@ -104,8 +127,9 @@ Suggested structure:
 3. Globale Erklärungen mit Permutation Feature Importance.
 4. Globale SHAP-Auswertung.
 5. Lokale SHAP-Erklärungen.
-6. Vergleich der XAI-Methoden.
-7. Zwischenfazit mit Domänenwissen.
+6. Lokale LIME-Erklärung.
+7. Vergleich der XAI-Methoden.
+8. Zwischenfazit mit Domänenwissen.
 
 Writing rules:
 
@@ -119,6 +143,7 @@ Acceptance criteria:
 - Chapter contains actual results, not only method descriptions.
 - Figures referenced in LaTeX exist in `Graphics/`.
 - Text answers RQ3 at least partially.
+- Text justifies why Random Forest is used for XAI although MLP is narrowly best by Macro-F1.
 
 ## Phase 5: Evaluation, Discussion, Conclusion, Abstract
 
@@ -150,6 +175,7 @@ Checklist:
 - `03_xai_explanations.ipynb` feature set matches training notebook and report.
 - All report figures exist locally.
 - No report text promises an XAI method that is not implemented.
+- XAI report text references all implemented XAI figures with exact filenames.
 - Current Overleaf export contains the latest graphics.
 - If Overleaf is updated manually, export/copy the newest folder locally before final check.
 
@@ -169,4 +195,4 @@ Run or verify:
 
 ## Copy-Paste Prompt For Next Chat
 
-Continue from this handoff. First read `_context-helper/START_HERE.md`, `_context-helper/NEXT_STEPS.md`, `_context-helper/CONTEXT_STATE.json`, and `_context-helper/EVIDENCE_INDEX.md`. Treat `XAI_Projektarbeit 19.54.42/` as the current report export unless a newer `XAI_Projektarbeit*` folder exists and the user confirms it. Use `human-voice-writer` for report prose. Ground all methodological justifications in checked sources with locators. Task: complete the XAI notebook and then fill the XAI report chapter so the report and notebook satisfy `Projektarbeit_Anforderungen.md`.
+Continue from this handoff. First read `_context-helper/START_HERE.md`, `_context-helper/NEXT_STEPS.md`, `_context-helper/CONTEXT_STATE.json`, and `_context-helper/EVIDENCE_INDEX.md`. Treat `XAI_Projektarbeit 19.54.42/` as the current report export unless a newer `XAI_Projektarbeit*` folder exists and the user confirms it. Use `human-voice-writer` for report prose. Ground all methodological justifications in checked sources with locators. Task: write the XAI report chapter from the already executed XAI notebook outputs, then complete evaluation/discussion/conclusion/abstract and run final consistency checks.

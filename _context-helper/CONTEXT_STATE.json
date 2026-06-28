@@ -19,16 +19,16 @@
     "XAI_Projektarbeit 19.54.42/Chapters/Architektur-Implementierung.tex",
     "XAI_Projektarbeit 19.54.42/Chapters/Ergebnisse-der-Klassifikation.tex",
     "notebooks/02_model_training.ipynb",
+    "notebooks/03_xai_explanations.ipynb",
     "reports/notes/domain_research.md"
   ],
   "main_gaps": [
-    "XAI chapter is empty while XAI implementation is partial.",
     "Evaluation/discussion/conclusion/abstract are mostly missing.",
-    "Feature-selection wording mismatch around ShapeFactor3 vs ShapeFactor4.",
-    "Metric table mismatch between notebooks/modelvergleich.tex and current report table.",
+    "XAI chapter is drafted in the current export, but should be rechecked after any newer Overleaf export.",
+    "Potential metric/table drift should be checked once more before final submission.",
     "Multiple XAI_Projektarbeit* folders can exist due to Overleaf exports; use the newest confirmed export."
   ],
-  "latest_code_update": "notebooks/02_model_training.ipynb was cleaned into an abgabeready linear workflow with fixed final model parameters, fresh execution outputs, modelvergleich.tex export, classification reports for all four models, and four-model confusion-matrix export.",
-  "latest_report_update": "XAI_Projektarbeit 19.54.42/Chapters/Ergebnisse-der-Klassifikation.tex and Architektur-Implementierung.tex were synchronized with the freshly executed notebook values and Python version.",
+  "latest_code_update": "notebooks/03_xai_explanations.ipynb now runs end-to-end with final Random Forest parameters and exports Permutation Importance, global SHAP, local SHAP, and local LIME figures to the notebook and report graphics folders.",
+  "latest_report_update": "XAI_Projektarbeit 19.54.42/Chapters/XAI-Methoden.tex was written from executed PFI, SHAP, and LIME notebook outputs and the local LaTeX build succeeds.",
   "generated_files_updated": true
 }

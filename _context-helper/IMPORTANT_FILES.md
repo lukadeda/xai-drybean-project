@@ -7,11 +7,11 @@
 - `XAI_Projektarbeit 19.54.42/Chapters/Architektur-Implementierung.tex`: documents final feature set and experimental setup.
 - `XAI_Projektarbeit 19.54.42/Chapters/Ergebnisse-der-Klassifikation.tex`: contains the main current model results.
 - `notebooks/02_model_training.ipynb`: computational source for model metrics and classification reports.
-- `notebooks/03_xai_explanations.ipynb`: likely next coding target for completing XAI results.
+- `notebooks/03_xai_explanations.ipynb`: executed XAI source for Permutation Importance, SHAP, and LIME results.
 
 ## Medium Priority
 
-- `notebooks/01_eda_feature_selection.ipynb`: EDA source, but note the markdown/code mismatch around `ShapeFactor3` vs `ShapeFactor4`.
+- `notebooks/01_eda_feature_selection.ipynb`: EDA source; now runs with SSL fix, final feature names, and corrected `X_all` usage.
 - `reports/notes/domain_research.md`: concise domain assumptions useful for discussion and XAI interpretation.
 - `XAI_Projektarbeit 19.54.42/Chapters/Grundlagen.tex`: literature and method background.
 - `XAI_Projektarbeit 19.54.42/Bibliography.bib`: citation source.

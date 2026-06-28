@@ -73,24 +73,31 @@ Current main result table in `XAI_Projektarbeit 19.54.42/Chapters/Ergebnisse-der
 - MLP Neural Network: Accuracy `0.923`, Macro-F1 `0.934`.
 - HistGradientBoosting: Accuracy `0.920`, Macro-F1 `0.932`.
 - Logistic Regression: Accuracy `0.917`, Macro-F1 `0.931`.
-- Random Forest: Accuracy `0.917`, Macro-F1 `0.929`.
+- Random Forest: Accuracy `0.918`, Macro-F1 `0.931`.
 
 Interpretation: all models are close; MLP is only narrowly best in this test run, not clearly superior.
 
 ## XAI Status
 
-Planned methods:
+Implemented in `notebooks/03_xai_explanations.ipynb`:
 
-- Permutation Feature Importance.
-- SHAP.
-- LIME.
+- Permutation Feature Importance for the final Random Forest model, scored with Macro-F1.
+- Global SHAP feature importance for the same Random Forest model.
+- Local SHAP explanation for one correctly classified test instance.
+- Local LIME explanation for the same test instance.
 
-Implemented evidence found:
+Generated figures exist in both `notebooks/` and `XAI_Projektarbeit 19.54.42/Graphics/`:
 
-- `03_xai_explanations.ipynb` contains Permutation Importance for Random Forest.
-- SHAP is present only as commented starter code.
-- LIME is not implemented in the inspected notebook.
-- `XAI_Projektarbeit 19.54.42/Chapters/XAI-Methoden.tex` is structurally prepared but empty.
+- `Permutation_Importance_RandomForest.pdf`
+- `SHAP_Global_RandomForest.pdf`
+- `SHAP_Local_RandomForest.pdf`
+- `LIME_Local_RandomForest.pdf`
+
+Key XAI result pattern: Permutation Importance ranks `ShapeFactor1`, `Roundness`, and `Area` highest. Global SHAP ranks `ShapeFactor1`, `Area`, `ShapeFactor2`, and `Compactness` highest. The local SHAP/LIME example is a correctly classified `DERMASON` instance and is mainly driven by size and shape-factor conditions.
+
+`XAI_Projektarbeit 19.54.42/Chapters/XAI-Methoden.tex` has now been written from these outputs. It references all four XAI figures and explains why Random Forest is used for XAI although MLP is narrowly best by Macro-F1.
+
+Source check: Molnar's chapters on LIME, SHAP, and Permutation Feature Importance align with the implemented structure. Important caveats for report writing are correlated features, PFI's loss-based/ranking-only interpretation, SHAP's dependence assumptions, and LIME's neighborhood/fidelity/stability limitations. The `Gastvorlesung/` XAI material is image-based Captum Grad-CAM and should be mentioned only as a contrast if needed.
 
 ## Report Status
 
@@ -107,7 +114,6 @@ Mostly drafted:
 Mostly missing:
 
 - Abstract.
-- XAI result chapter.
 - Evaluation/discussion.
 - Discussion chapter.
 - Conclusion/outlook.
