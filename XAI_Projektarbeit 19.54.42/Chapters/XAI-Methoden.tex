@@ -2,9 +2,12 @@
 
 Dieses Kapitel untersucht, welche Merkmale die Modellentscheidungen erklären. Dafür werden globale und lokale XAI-Methoden kombiniert. Die globale Sicht zeigt, welche Merkmale das Modell insgesamt stark nutzt. Die lokale Sicht zeigt dagegen, wie eine einzelne Vorhersage zustande kommt.
 
+
+\section{Modell- und Methodenauswahl}
+
 Als erklärtes Modell wurde der Random Forest verwendet. Das MLP erreicht im Modellvergleich zwar den höchsten Macro-F1-Wert, liegt aber nur knapp vor den anderen Modellen. Für die XAI-Auswertung ist der Random Forest deshalb ein sinnvoller Kompromiss: Er erreicht mit einem Macro-F1 von 0{,}931 fast dieselbe Leistung wie das MLP, arbeitet direkt auf den unskalierten Merkmalen und ist als baumbasiertes Modell gut mit TreeSHAP erklärbar \cite[Kap.~18]{molnar2025interpretable}. Die Erklärung bezieht sich also nicht auf das formal beste Modell des Testlaufs, sondern auf ein ähnlich leistungsstarkes Modell, dessen Entscheidungen besser auswertbar sind.
 
-Die Auswertung verwendet drei Methoden: Permutation Feature Importance, SHAP und LIME. Permutation Feature Importance dient als globale, leistungsbezogene Erklärung. SHAP wird global und lokal genutzt. LIME ergänzt die lokale Betrachtung durch ein zweites, anders aufgebautes Erklärungsverfahren. Diese Auswahl passt zur in Kapitel~\ref{chap:Grundlagen} beschriebenen Zielsetzung: Die Erklärungen sollen nicht nur technische Ranglisten liefern, sondern zeigen, ob das Modell nachvollziehbare Größen- und Forminformationen verwendet.
+Die Auswertung verwendet drei Methoden: Permutation Feature Importance, SHAP und LIME. Permutation Feature Importance dient als globale, leistungsbezogene Erklärung. SHAP wird global und lokal genutzt. LIME ergänzt die lokale Betrachtung durch ein zweites, anders aufgebautes Erklärungsverfahren. Für die lokale Analyse werden zwei Testbeobachtungen betrachtet: eine korrekt klassifizierte Instanz und eine typische Fehlklassifikation. Diese Auswahl passt zur in Kapitel~\ref{chap:Grundlagen} beschriebenen Zielsetzung: Die Erklärungen sollen nicht nur technische Ranglisten liefern, sondern zeigen, ob das Modell nachvollziehbare Größen- und Forminformationen verwendet.
 
 \section{Globale Erklärungen mit Permutation Feature Importance}
 
@@ -38,9 +41,9 @@ Abbildung~\ref{fig:SHAP_Global_RandomForest} bestätigt einen Teil der PFI-Ergeb
 
 Die Unterschiede zwischen PFI und SHAP sind kein Widerspruch. Beide Methoden messen nicht dasselbe. PFI bewertet, wie stark die Modellleistung fällt, wenn ein Merkmal gestört wird. SHAP misst dagegen die durchschnittliche Größe der Merkmalsbeiträge zur Vorhersage \cite[Kap.~18, Kap.~23]{molnar2025interpretable}. Für die Interpretation ist deshalb vor allem das gemeinsame Muster wichtig: Größen- und Formmerkmale stehen oben, reine Länglichkeitsmaße wie \texttt{AspectRatio} und \texttt{Eccentricity} spielen im erklärten Random Forest eine kleinere Rolle.
 
-\section{Lokale SHAP-Erklärung}
+\section{Lokale Erklärung einer korrekten Vorhersage}
 
-Neben der globalen Sicht wurde eine einzelne korrekt klassifizierte Testbeobachtung betrachtet. Das Modell sagt für diese Beobachtung \texttt{DERMASON} vorher, und die tatsächliche Klasse ist ebenfalls \texttt{DERMASON}. Die lokale SHAP-Erklärung bezieht sich auf genau diese vorhergesagte Klasse.
+Neben der globalen Sicht wurde zuerst eine korrekt klassifizierte Testbeobachtung betrachtet. Das Modell sagt für diese Beobachtung \texttt{DERMASON} vorher, und die tatsächliche Klasse ist ebenfalls \texttt{DERMASON}. Die lokale SHAP-Erklärung bezieht sich auf genau diese vorhergesagte Klasse.
 
 \begin{figure}[htbp]
   \centering
@@ -52,8 +55,6 @@ Neben der globalen Sicht wurde eine einzelne korrekt klassifizierte Testbeobacht
 Abbildung~\ref{fig:SHAP_Local_RandomForest} zeigt, dass vor allem \texttt{Area}, \texttt{ShapeFactor2} und \texttt{ShapeFactor1} die Vorhersage in Richtung \texttt{DERMASON} verschieben. Auch \texttt{Roundness} und \texttt{Compactness} tragen positiv bei, aber schwächer. \texttt{AspectRatio} und \texttt{Eccentricity} haben in diesem konkreten Fall nur geringe Beiträge.
 
 Die Beobachtung passt zur globalen Auswertung. Auch dort stehen \texttt{ShapeFactor1}, \texttt{Area}, \texttt{ShapeFactor2} und \texttt{Compactness} weit oben. Für diesen Fall wirkt die Vorhersage daher nicht zufällig oder von einem schwer erklärbaren Einzelmerkmal abhängig. Das Modell stützt sich auf mehrere geometrische Merkmale, die zur Beschreibung der Bohnenform passen.
-
-\section{Lokale Erklärungen mit LIME}
 
 LIME wurde für dieselbe Testbeobachtung berechnet wie die lokale SHAP-Erklärung. Das erleichtert den Vergleich der Methoden. LIME erzeugt künstliche Varianten der Beobachtung, lässt diese vom Random Forest vorhersagen und trainiert daraus ein lokales Ersatzmodell \cite[Kap.~14]{molnar2025interpretable}. Die erklärten Merkmale erscheinen dabei als Bedingungen, weil kontinuierliche Werte diskretisiert werden.
 
@@ -68,9 +69,33 @@ Abbildung~\ref{fig:LIME_Local_RandomForest} zeigt ebenfalls einen starken Beitra
 
 Damit stützt LIME die SHAP-Erklärung für diesen Fall. Beide Methoden heben Größe und Formfaktoren hervor. Die Ergebnisse sollten trotzdem nicht als exakte Kausalbegründung gelesen werden. Molnar beschreibt LIME als lokale Approximation, deren Ergebnis von der gewählten Nachbarschaft, dem Sampling und der Stabilität des Ersatzmodells abhängt \cite[Kap.~14]{molnar2025interpretable}. Für diese Arbeit wird LIME deshalb als ergänzende Plausibilitätsprüfung genutzt, nicht als alleinige Erklärung.
 
+\section{Lokale Erklärung einer Fehlklassifikation}
+
+Als zweiter lokaler Fall wurde eine Fehlklassifikation aus einem wiederkehrenden Fehlermuster gewählt. Die tatsächliche Klasse ist \texttt{DERMASON}, der Random Forest sagt aber \texttt{SIRA} vorher. Dieser Fall ist für die Bewertung aussagekräftiger als eine weitere richtige Vorhersage, weil \texttt{DERMASON} und \texttt{SIRA} bereits in den Konfusionsmatrizen häufig verwechselt werden.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.85\textwidth]{Graphics/SHAP_Local_Misclassified_RandomForest.pdf}
+  \caption{Lokale SHAP-Erklärung einer DERMASON-Instanz, die als SIRA klassifiziert wurde}
+  \label{fig:SHAP_Local_Misclassified_RandomForest}
+\end{figure}
+
+Abbildung~\ref{fig:SHAP_Local_Misclassified_RandomForest} zeigt die SHAP-Beiträge für die vorhergesagte Klasse \texttt{SIRA}. Besonders stark in Richtung \texttt{SIRA} wirken ShapeFactor1, Roundness, Area und Compactness. ShapeFactor2 trägt ebenfalls positiv bei. Die Beiträge von Eccentricity und AspectRatio sind kleiner. ShapeFactor4 wirkt in diesem Fall leicht gegen die Vorhersage \texttt{SIRA}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.85\textwidth]{Graphics/LIME_Local_Misclassified_RandomForest.pdf}
+  \caption{Lokale LIME-Erklärung derselben DERMASON-Instanz, die als SIRA klassifiziert wurde}
+  \label{fig:LIME_Local_Misclassified_RandomForest}
+\end{figure}
+
+Die LIME-Erklärung in Abbildung~\ref{fig:LIME_Local_Misclassified_RandomForest} zeigt ein ähnliches Muster. Die stärksten positiven Gewichte für \texttt{SIRA} liegen bei einer mittleren \texttt{Area}, bei \texttt{ShapeFactor1}, \texttt{Compactness} und \texttt{Roundness}. \texttt{ShapeFactor4} erhält ein kleines negatives Gewicht. Die beiden lokalen Methoden erklären die Fehlklassifikation also nicht als Ausreißer, sondern als Fall, dessen Größen- und Formwerte aus Sicht des Modells eher zur Klasse \texttt{SIRA} passen.
+
+Dieser zweite lokale Fall macht die Grenze des Modells deutlicher. Die Erklärung ist fachlich plausibel, aber sie zeigt zugleich, warum die reine Modellleistung nicht ausreicht. Wenn zwei Sorten morphologisch nah beieinanderliegen, können dieselben Merkmalsgruppen die richtige Trennung unterstützen und in Grenzfällen zu einer Verwechslung beitragen.
+
 \section{Vergleich der XAI-Methoden}
 
-Die drei Methoden beantworten unterschiedliche Fragen. Permutation Feature Importance zeigt, welche Merkmale für die Testleistung des Random Forest wichtig sind. SHAP zeigt, wie stark Merkmale zu Vorhersagen beitragen, und kann von lokalen Erklärungen zu einer globalen Rangfolge verdichtet werden. LIME erklärt einzelne Vorhersagen über ein lokales Ersatzmodell.
+Die drei Methoden beantworten unterschiedliche Fragen. Permutation Feature Importance zeigt, welche Merkmale für die Testleistung des Random Forest wichtig sind. SHAP zeigt, wie stark Merkmale zu Vorhersagen beitragen, und kann von lokalen Erklärungen zu einer globalen Rangfolge verdichtet werden. LIME erklärt einzelne Vorhersagen über ein lokales Ersatzmodell. Durch die zwei lokalen Fälle wird sichtbar, wie sich die Methoden bei einer richtigen Vorhersage und bei einer typischen Fehlklassifikation verhalten.
 
 Inhaltlich zeigen die Methoden ein ähnliches Bild. \texttt{ShapeFactor1}, \texttt{Area}, \texttt{ShapeFactor2}, \texttt{Roundness} und \texttt{Compactness} treten wiederholt als wichtige Merkmale auf. Das spricht dafür, dass der Random Forest vor allem Größen- und Forminformationen nutzt. Die beiden Länglichkeitsmerkmale \texttt{AspectRatio} und \texttt{Eccentricity} sind im aktuellen Modell weniger einflussreich.
 
@@ -80,4 +105,4 @@ Die Unterschiede zwischen den Rangfolgen sind trotzdem wichtig. \texttt{Roundnes
 
 Die XAI-Auswertung zeigt, dass der Random Forest seine Entscheidungen vor allem auf morphologisch gut interpretierbare Merkmale stützt. Besonders wichtig sind Formfaktoren, Fläche, Rundheit und Kompaktheit. Damit passen die Erklärungen grundsätzlich zum Domänenwissen: Bohnensorten unterscheiden sich sichtbar durch Größe, Rundheit und Form.
 
-Für die Forschungsfrage bedeutet das: Die Modelle liefern nicht nur hohe Klassifikationswerte, sondern ihre Entscheidungen lassen sich mit den verwendeten XAI-Methoden inhaltlich nachvollziehen. Die Aussage bleibt aber begrenzt. Stark korrelierte Merkmale erschweren die Interpretation, und lokale Erklärungen zeigen immer nur einzelne Fälle. Für die weitere Diskussion ist deshalb entscheidend, die XAI-Ergebnisse zusammen mit der EDA, den Konfusionsmatrizen und den bekannten Fehlermustern zwischen \texttt{DERMASON}/\texttt{SIRA} sowie \texttt{BARBUNYA}/\texttt{CALI} zu lesen.
+Für die Forschungsfrage bedeutet das: Die Modelle liefern nicht nur hohe Klassifikationswerte, sondern ihre Entscheidungen lassen sich mit den verwendeten XAI-Methoden inhaltlich nachvollziehen. Die Aussage bleibt aber begrenzt. Stark korrelierte Merkmale erschweren die Interpretation, und lokale Erklärungen zeigen ausgewählte Einzelfälle. Für die weitere Diskussion ist deshalb entscheidend, die XAI-Ergebnisse zusammen mit der EDA, den Konfusionsmatrizen und den bekannten Fehlermustern zwischen \texttt{DERMASON}/\texttt{SIRA} sowie \texttt{BARBUNYA}/\texttt{CALI} zu lesen.

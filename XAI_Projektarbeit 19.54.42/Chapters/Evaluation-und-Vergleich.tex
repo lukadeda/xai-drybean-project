@@ -1,0 +1,29 @@
+\chapter{Evaluation und Vergleich}\label{chap:Evaluation-und-Vergleich}
+
+Dieses Kapitel führt die Klassifikationsergebnisse und die XAI-Auswertung zusammen. Entscheidend ist nicht nur, welches Modell die höchsten Kennzahlen erreicht. Ebenso wichtig ist, ob die Fehlerstruktur fachlich erklärbar ist und ob die Modellentscheidungen auf nachvollziehbaren Merkmalen beruhen.
+
+\section{Bewertung der Modellleistung}
+
+Die vier untersuchten Modelle erreichen im Testsetup sehr ähnliche Ergebnisse. Das MLP erzielt mit einer Accuracy von 0{,}923 und einem Macro-F1 von 0{,}934 die höchsten Werte. Der Abstand zu HistGradientBoosting, Random Forest und logistischer Regression ist aber klein. Zwischen dem besten und dem schwächsten Modell liegen nur 0{,}006 Accuracy-Punkte und 0{,}004 Macro-F1-Punkte.
+
+Aus den reinen Kennzahlen lässt sich deshalb kein klar überlegenes Modell ableiten. Das MLP ist das beste Modell dieses Testlaufs, aber nicht mit großem Abstand. Der Random Forest ist für die weitere Interpretation besonders interessant, weil er fast dieselbe Leistung erreicht und sich besser mit SHAP erklären lässt. Die logistische Regression bleibt als einfaches Vergleichsmodell wichtig, weil sie trotz ihrer geringeren Komplexität eine ähnliche Leistung erzielt.
+
+\section{Fehlerstruktur der Modelle}
+
+Die Konfusionsmatrizen zeigen, dass die Fehler nicht zufällig über alle Klassen verteilt sind. \texttt{BOMBAY} wird sehr zuverlässig erkannt. Das passt zur fachlichen Erwartung, weil diese Sorte im Datensatz deutlich größere Bohnen aufweist und sich dadurch stärker von den übrigen Klassen abhebt.
+
+Schwieriger sind die Trennungen zwischen \texttt{DERMASON} und \texttt{SIRA} sowie zwischen \texttt{BARBUNYA} und \texttt{CALI}. Diese Fehlermuster treten bei mehreren Modellen auf. Das spricht dafür, dass die betroffenen Sorten mit dem reduzierten Feature-Set tatsächlich schwerer zu unterscheiden sind. Die Ursache liegt daher nicht nur in einem einzelnen Modell, sondern auch in der Ähnlichkeit der morphologischen Merkmale.
+
+\section{Einordnung der XAI-Ergebnisse}
+
+Die XAI-Auswertung zeigt, dass der Random Forest vor allem Größen- und Formmerkmale nutzt. Besonders häufig treten \texttt{ShapeFactor1}, \texttt{Area}, \texttt{ShapeFactor2}, \texttt{Roundness} und \texttt{Compactness} als wichtige Merkmale auf. Das ist fachlich plausibel, weil Bohnensorten über sichtbare Unterschiede in Größe, Rundheit und Form beschrieben werden können.
+
+Gleichzeitig zeigen die XAI-Methoden keine perfekte oder eindeutige Rangfolge. Permutation Feature Importance bewertet den Leistungsverlust nach dem Vertauschen eines Merkmals. SHAP betrachtet dagegen Merkmalsbeiträge zur Vorhersage. LIME erklärt nur eine lokale Umgebung um eine einzelne Beobachtung. Deshalb unterscheiden sich einzelne Rangplätze, obwohl das Gesamtbild ähnlich bleibt.
+
+Für die Bewertung ist genau dieses gemeinsame Muster entscheidend. Die Erklärungen stützen die Annahme, dass der Random Forest keine beliebigen Datenartefakte ausnutzt, sondern morphologisch sinnvolle Informationen verwendet. Die Aussage bleibt aber begrenzt, weil mehrere Features stark korrelieren. Bei solchen Merkmalen kann sich Wichtigkeit zwischen ähnlichen Variablen aufteilen.
+
+\section{Vergleich von Leistung und Erklärbarkeit}
+
+Das beste Modell nach Macro-F1 ist das MLP. Für die XAI-Auswertung wurde trotzdem der Random Forest gewählt. Diese Entscheidung ist vertretbar, weil der Leistungsunterschied klein ist und der Random Forest besser interpretierbar bleibt. In dieser Arbeit ist daher nicht nur die maximale Modellleistung relevant, sondern auch die Frage, ob die Entscheidungen nachvollzogen werden können.
+
+Der Vergleich zeigt einen praktischen Zielkonflikt. Komplexere Modelle können leicht bessere Kennzahlen erreichen, liefern aber nicht automatisch bessere Erklärungen. Einfachere oder baumbasierte Modelle können etwas schlechter abschneiden, sind dafür aber leichter mit globalen und lokalen XAI-Methoden zu untersuchen. Im vorliegenden Testsetup ist dieser Unterschied klein genug, dass der Random Forest als erklärtes Modell sinnvoll bleibt.
