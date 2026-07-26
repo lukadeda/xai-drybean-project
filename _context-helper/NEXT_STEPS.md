@@ -4,7 +4,49 @@
 
 Bring the project to a submission-ready state. Submission requires both the written report and a working Jupyter notebook. The notebook outputs must match the report values and figures.
 
+## 2026-07-26 update
+
+- The mandatory XAI comparison is implemented in `notebooks/03_xai_explanations.ipynb` for Logistic Regression, Random Forest, HistGradientBoosting, and MLP.
+- PFI uses the same test data and `f1_macro` for all models. Global SHAP uses TreeSHAP for the tree models, LinearSHAP for the scaled logistic model, and bounded KernelSHAP for the MLP. Local SHAP and LIME include a shared correct DERMASON case and DERMASON-as-SIRA errors for all models.
+- The notebook exports `Permutation_Importance_Alle_Modelle.pdf`, `SHAP_Global_Alle_Modelle.pdf`, four local comparison PDFs, and CSV result tables to `notebooks/` and the report graphics folder.
+- Report prose and README were updated. Execute the three notebooks and build the report before submission; then confirm that all references and figures remain valid.
+
 Current confirmed report export: `XAI_Projektarbeit 19.54.42/`.
+
+## Submission Audit (latest verified state)
+
+Verified:
+
+- `notebooks/01_eda_feature_selection.ipynb`, `notebooks/02_model_training.ipynb`, and `notebooks/03_xai_explanations.ipynb` execute successfully in `.venv`.
+- Fresh training values match the reported rounded values: MLP `0.923/0.934`, HistGradientBoosting `0.920/0.932`, Random Forest `0.918/0.931`, Logistic Regression `0.917/0.931` (Accuracy/Macro-F1).
+- Current report export builds with `latexmk -pdf -interaction=nonstopmode -halt-on-error "htwsaar-i-mst-vorlage.tex"` and has no unresolved references/citations.
+
+Required before final submission:
+
+1. Correct `FrontBackmatter/Titlepage.tex`: it still says `Fallstudie im Fach Software-Architektur (PIM-SAR)` instead of the correct XAI project/module framing.
+2. Write `FrontBackmatter/Abstract.tex`.
+3. Write `Chapters/Diskussion.tex`.
+4. Fill the empty `Fazit` and `Ausblick` sections in `Chapters/Ausblick.tex`.
+5. Update root `README.md`: it still presents MLP and LIME as optional/planned although both are final components. Include final execution order and dependencies for reproducible code delivery.
+6. Re-export the newest Overleaf report, copy it locally, then perform one final report/notebook/figure consistency check.
+
+## Professor clarification: mandatory XAI model comparison
+
+Email from Prof. Dr. Christoph Tholen, 17 July 2026: `Sie sollten die Methoden auf die verschiedenen Modelle anwenden und die Ergebnisse vergleichen.`
+
+Implication:
+
+- The current XAI notebook, which applies PFI, SHAP, and LIME only to Random Forest, is insufficient for the final submission.
+- Extend XAI to multiple trained model families and compare results explicitly in notebook and report.
+- Do not write final discussion, conclusion, abstract, or final XAI claims until the expanded XAI evidence is available.
+
+Latest peer-review-related report edits to mirror in Overleaf:
+
+- `Chapters/Architektur-Implementierung.tex`: readable model-configuration table in the modelling section, with full parameters delegated to the training notebook.
+- `Chapters/Einleitung.tex`: XAI introduced as Explainable Artificial Intelligence; SHAP, LIME, and PFI expanded at first grouped mention.
+- `Chapters/Grundlagen.tex`: SHAP, LIME, and PFI expanded in their method subsections.
+- `FrontBackmatter/Abbreviations.tex`: cleaned abbreviation list with only used entries: `EDA`, `LIME`, `MLP`, `PFI`, `RAM`, `SHAP`, `XAI`.
+- `htwsaar-i-mst-config.tex`: `\PassOptionsToPackage{nohyperlinks}{acronym}` added and `printonlyused` disabled so the abbreviation list appears without requiring `\ac{...}` calls throughout the report.
 
 Before any report work, check whether the user imported a newer `XAI_Projektarbeit*` Overleaf export. If yes, treat the newest confirmed export as authoritative.
 

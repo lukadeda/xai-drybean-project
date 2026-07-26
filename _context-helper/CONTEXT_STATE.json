@@ -10,7 +10,7 @@
   "evidence_preference": "Report justifications must be grounded in checked sources with references/locators. Do not invent support from memory.",
   "submission_scope": "Report and Jupyter notebook both matter. The notebook must run and its metrics/figures must match the report.",
   "confidence": "medium-high",
-  "coverage_status": "partial",
+  "coverage_status": "expanded XAI model comparison implemented; final verification pending",
   "handoff_readiness": "medium-high",
   "strongest_sources": [
     "README.md",
@@ -23,12 +23,15 @@
     "reports/notes/domain_research.md"
   ],
   "main_gaps": [
-    "Evaluation/discussion/conclusion/abstract are mostly missing.",
-    "XAI chapter is drafted in the current export, but should be rechecked after any newer Overleaf export.",
-    "Potential metric/table drift should be checked once more before final submission.",
+    "FrontBackmatter/Abstract.tex is empty.",
+    "Chapters/Diskussion.tex is empty.",
+    "The Fazit and Ausblick sections in Chapters/Ausblick.tex are empty.",
+    "The title page still says Fallstudie im Fach Software-Architektur (PIM-SAR), which must be corrected for the XAI submission.",
+    "Root README.md still describes MLP and LIME as optional/planned; update it for reproducible final-code submission.",
+    "Professor email dated 17 July 2026 requires applying XAI methods to different models and comparing their results. Current XAI-only Random Forest evaluation is insufficient.",
     "Multiple XAI_Projektarbeit* folders can exist due to Overleaf exports; use the newest confirmed export."
   ],
-  "latest_code_update": "notebooks/03_xai_explanations.ipynb now runs end-to-end with final Random Forest parameters and exports Permutation Importance, global SHAP, local SHAP, and local LIME figures to the notebook and report graphics folders.",
-  "latest_report_update": "XAI_Projektarbeit 19.54.42/Chapters/XAI-Methoden.tex was written from executed PFI, SHAP, and LIME notebook outputs and the local LaTeX build succeeds.",
+  "latest_code_update": "notebooks/03_xai_explanations.ipynb now applies PFI, global SHAP, local SHAP, and local LIME to Logistic Regression, Random Forest, HistGradientBoosting, and MLP on the final split. It exports comparison graphics and CSV tables to notebooks and the current report graphics folder.",
+  "latest_report_update": "The XAI chapter now documents the mandatory cross-model comparison. Evaluation, discussion, conclusion, abstract, title page, and README were updated for final submission. A final notebook and LaTeX build verification is pending.",
   "generated_files_updated": true
 }

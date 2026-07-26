@@ -1,0 +1,16 @@
+%*******************************************************
+% Abstract
+%*******************************************************
+\pdfbookmark[0]{Zusammenfassung}{Zusammenfassung}
+\chapter*{Zusammenfassung}
+
+Die Arbeit untersucht die Multiclass-Klassifikation von sieben Dry-Bean-Sorten mit acht morphologischen Merkmalen aus dem UCI Dry Bean Dataset. Verglichen werden Logistic Regression, Random Forest, HistGradientBoosting und ein Multi-Layer-Perzeptron. Die Daten werden stratifiziert in Trainings- und Testdaten aufgeteilt. Die Bewertung erfolgt mit Accuracy, Macro-F1 und Konfusionsmatrizen, da die Klassen ungleich verteilt sind.
+
+Alle Modelle erreichen hohe und nahe beieinanderliegende Testwerte. Das MLP erzielt mit einer Accuracy von 0{,}923 und einem Macro-F1 von 0{,}934 das beste Ergebnis. HistGradientBoosting erreicht 0{,}920 und 0{,}932, Random Forest 0{,}918 und 0{,}931, die logistische Regression 0{,}917 und 0{,}931. Die Fehler konzentrieren sich vor allem auf morphologisch ähnliche Sorten, insbesondere DERMASON und SIRA sowie BARBUNYA und CALI.
+
+Zur Erklärung werden Permutation Feature Importance, SHAP und LIME auf alle vier finalen Modelle angewandt. Die globalen Vergleiche zeigen über die Modelle hinweg eine wiederkehrende Bedeutung von \texttt{Area} und \texttt{ShapeFactor1}. Lokale Erklärungen behandeln eine korrekt klassifizierte DERMASON-Instanz sowie DERMASON-als-SIRA-Fehlfälle. Die Erklärungen passen zu der Annahme, dass die Modelle Größen- und Forminformationen der Bohnen nutzen. Wegen korrelierter Merkmale, der begrenzten lokalen Beispiele und eines einzelnen Testsplit sind die Rangfolgen jedoch vorsichtig zu interpretieren. Die XAI-Ergebnisse beschreiben Modellverhalten und keine kausalen Zusammenhänge.
+
+
+%Kurze Zusammenfassung des Inhaltes in deutscher Sprache, der Umfang beträgt zwischen einer halben und einer ganzen DIN A4-Seite.
+
+%Orientieren Sie sich bei der Aufteilung bzw. dem Inhalt Ihrer Zusammenfassung an Kent Becks Artikel: \url{http://plg.uwaterloo.ca/~migod/research/beckOOPSLA.html}.

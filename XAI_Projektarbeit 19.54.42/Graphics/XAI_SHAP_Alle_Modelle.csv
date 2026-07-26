@@ -1,0 +1,33 @@
+model,feature,mean_abs_shap
+Logistic Regression,Area,5.487918343711413
+Logistic Regression,AspectRatio,3.3793250933000456
+Logistic Regression,Eccentricity,2.0092592671848957
+Logistic Regression,Compactness,1.3399267519670044
+Logistic Regression,Roundness,0.8710447706564818
+Logistic Regression,ShapeFactor1,3.8343320073033658
+Logistic Regression,ShapeFactor2,3.438120990699275
+Logistic Regression,ShapeFactor4,0.7188655851023946
+Random Forest,Area,0.061018729421292627
+Random Forest,AspectRatio,0.025207982962297402
+Random Forest,Eccentricity,0.016355432919650165
+Random Forest,Compactness,0.0424459659031178
+Random Forest,Roundness,0.028420354183428226
+Random Forest,ShapeFactor1,0.07014136443328234
+Random Forest,ShapeFactor2,0.04601343994445403
+Random Forest,ShapeFactor4,0.013575231142141125
+HistGradientBoosting,Area,1.140999631483663
+HistGradientBoosting,AspectRatio,0.2702366415004261
+HistGradientBoosting,Eccentricity,0.0
+HistGradientBoosting,Compactness,0.47546368243513165
+HistGradientBoosting,Roundness,0.3464232573981936
+HistGradientBoosting,ShapeFactor1,0.8140181675997367
+HistGradientBoosting,ShapeFactor2,0.3152140693636054
+HistGradientBoosting,ShapeFactor4,0.21987945718365515
+MLP Neural Network,Area,0.06636568459089712
+MLP Neural Network,AspectRatio,0.045705727012207605
+MLP Neural Network,Eccentricity,0.024265211909343415
+MLP Neural Network,Compactness,0.024752008621416122
+MLP Neural Network,Roundness,0.04675608360809358
+MLP Neural Network,ShapeFactor1,0.08140428311693232
+MLP Neural Network,ShapeFactor2,0.04729836842073668
+MLP Neural Network,ShapeFactor4,0.02831783895964368
