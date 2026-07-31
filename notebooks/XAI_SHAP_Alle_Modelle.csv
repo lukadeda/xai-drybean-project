@@ -23,11 +23,11 @@ HistGradientBoosting,Roundness,0.3464232573981936
 HistGradientBoosting,ShapeFactor1,0.8140181675997367
 HistGradientBoosting,ShapeFactor2,0.3152140693636054
 HistGradientBoosting,ShapeFactor4,0.21987945718365515
-MLP Neural Network,Area,0.06636568459089712
-MLP Neural Network,AspectRatio,0.045705727012207605
-MLP Neural Network,Eccentricity,0.024265211909343415
-MLP Neural Network,Compactness,0.024752008621416122
-MLP Neural Network,Roundness,0.04675608360809358
-MLP Neural Network,ShapeFactor1,0.08140428311693232
-MLP Neural Network,ShapeFactor2,0.04729836842073668
-MLP Neural Network,ShapeFactor4,0.02831783895964368
+MLP Neural Network,Area,0.06568982879890198
+MLP Neural Network,AspectRatio,0.04591722119632422
+MLP Neural Network,Eccentricity,0.024118289425076465
+MLP Neural Network,Compactness,0.024681326957498532
+MLP Neural Network,Roundness,0.04587161574100777
+MLP Neural Network,ShapeFactor1,0.08143110876279663
+MLP Neural Network,ShapeFactor2,0.04705327253935138
+MLP Neural Network,ShapeFactor4,0.028292735812688884
