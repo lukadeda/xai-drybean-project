@@ -1,5 +1,6 @@
 jupyterlab
 ipykernel
+ipywidgets
 pandas
 numpy
 scikit-learn
