@@ -1,5 +1,0 @@
-model,korrekt_true,korrekt_pred,fehler_true,fehler_pred,fehlerauswahl
-Logistic Regression,DERMASON,DERMASON,DERMASON,SIRA,bevorzugtes Fehlmuster DERMASON als SIRA
-Random Forest,DERMASON,DERMASON,DERMASON,SIRA,bevorzugtes Fehlmuster DERMASON als SIRA
-HistGradientBoosting,DERMASON,DERMASON,DERMASON,SIRA,bevorzugtes Fehlmuster DERMASON als SIRA
-MLP Neural Network,DERMASON,DERMASON,DERMASON,SIRA,bevorzugtes Fehlmuster DERMASON als SIRA
