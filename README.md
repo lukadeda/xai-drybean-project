@@ -51,11 +51,3 @@ notebooks/    Analysis, training, and explanation notebooks
 reports/      Notes and report assets
 src/          Shared Python utilities
 ```
-
-## References
-
-- Köklü, M. and Özkan, I. A. (2020). Multiclass classification of dry beans using computer vision and machine learning techniques. *Computers and Electronics in Agriculture*, 174, 105507.
-- Krishnan, S. et al. (2023). Identification of Dry Bean Varieties Using CatBoost. *Scientific Programming*.
-- Lundberg, S. M. and Lee, S.-I. (2017). A Unified Approach to Interpreting Model Predictions. *NeurIPS*.
-- Ribeiro, M. T., Singh, S., and Guestrin, C. (2016). Why Should I Trust You? *KDD*.
-- Molnar, C. (2022). *Interpretable Machine Learning*.
